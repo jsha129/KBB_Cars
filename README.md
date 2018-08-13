@@ -16,7 +16,7 @@ Here, I web scrape Kelley Blue Book (KBB), a reputable website for searching for
 
 # Minimal working example
 ## 1. Web scraping
-
+Web scraping of KBB is performed by two R scripts:  'KBB_cars.R' and 'presets.R'. 
 
 ## 2. Data wrangling 
 
