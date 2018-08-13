@@ -18,7 +18,7 @@ All scripts are functional as of August 13, 2018.
 
 # Minimal working example
 ## 1. Web scraping
-Web scraping of KBB is performed by two R scripts:  [KBB_cars.R](/KBB_cars.R) and [presets.R](/presets.R). [KBB_cars.R](/KBB_cars.R) provides details on which car makes and city zip codes to search for whereas the actual functions for web scraping can be found in [presets.R](/presets.R). 
+Web scraping of KBB is performed by two R scripts:  [KBB_cars.R](/KBB_cars.R) and [presets.R](/presets.R). [KBB_cars.R](/KBB_cars.R) provides details on which car makes and city zip codes to search for whereas the actual functions for web scraping can be found in [presets.R](/presets.R) and should not require any modifications. 
 
 ### Setting up information in [KBB_cars.R](/KBB_cars.R)
 Change makes of cars, zip codes and distance from each zip codes as follows.
@@ -32,16 +32,13 @@ zips <- c(80303, # Boulder, CO, USA
 
 ```
 
-The script searches for past 20 years of data. You can change this by following: 
+The script searches for past 20 years of data. You can change this modifying **-20** in following code: 
 
 ```r
-years <- seq(lubridate::year(Sys.Date())*-20*,lubridate::year(Sys.Date()),1)
+years <- seq(lubridate::year(Sys.Date())-20,lubridate::year(Sys.Date()),1)
 ```
 
-
-
-
-
+Rest should work fine. See [KBB_cars.log](/KBB_cars.log) for the log when I ran the script.
 
 ## 2. Data wrangling 
 
