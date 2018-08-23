@@ -46,11 +46,14 @@ Rest should work fine. See [KBB_cars.log](/KBB_cars.log) for the log when I ran 
 ### Modelling price of a car based on its age - an overview
 I used exploratory data analysis (EDA) to visualise how age of a car affects its price for all makes and models. From the graph on left below, the price of a car, in general, seem to follow 'exponential decay model' in response to its age. I plotted the data after applying log 10 transformation, and the log-transformed price of a car and its age appear to follow a linear relationship. 
 
-This relationship is represented as follow mathematically: 
+![](/car_depr_overview.png)
+This relationship is mathematically represented as follow: 
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\fn_phv&space;\large&space;log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\fn_phv&space;\large&space;log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\epsilon" title="\large log (Price) = \beta_0 + \beta_1 (Age) + \epsilon" /></a>
 
-where log 10 (Price) is the response variable and age of a car is the predictor variable. B0 is a constant of the model, B1 is cofficient of Age (ie how each year affects the price) and e is error or unexplained variation of the model.
+where log 10 (Price) is the response variable and age of a car is the predictor variable. B0 is a constant of the model, B1 is cofficient of Age (ie annual depreciation rate) and e is error or unexplained variation of the model.
+
+
 
 
 
