@@ -61,7 +61,7 @@ We will be applying log-linear model for rest of the case study.
 ### Estimating depreciation rate for car makes and models
 Currently, the data frame has separate columns for Make (ie Honda) and Models (Accord). We **could** use make and models as the predictor variables. However, this would imply that the model would use every perumtations of make and models to estimate the coefficients, which would be inaccurate in the real world because combinations such as 'Toyota Accord' and 'Honda Corolla' would not exist. To simplify  math and improve accuracy, I first create a variable 'ID' that is simply concatenation of make_model. 
 
-EDA of each car make and model can be found in (/car_depr_by_year_simple.pdf)
+EDA of each car make and model can be found in [car_depr_by_year_simple.pdf](/car_depr_by_year_simple.pdf)
 
 Next, we add the 'ID' variable in the original linear model comprising of a car's age.
 <a href="https://www.codecogs.com/eqnedit.php?latex=\fn_phv&space;\large&space;log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\beta_2&space;(ID)&plus;\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\fn_phv&space;\large&space;log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\beta_2&space;(ID)&plus;\epsilon" title="\large log (Price) = \beta_0 + \beta_1 (Age) + \beta_2 (ID)+\epsilon" /></a>
