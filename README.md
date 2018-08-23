@@ -43,3 +43,7 @@ Rest should work fine. See [KBB_cars.log](/KBB_cars.log) for the log when I ran 
 ## 2. Data wrangling 
 
 ## 3. Statistical modelling to estimate depreciation rates
+### Modelling price of a car based on its age - an overview
+I used exploratory data analysis (EDA) to visualise how age of a car affects its price for all makes and models. From the graph on left below, the price of a car, in general, seem to follow 'exponential decay model' in response to its age. I plotted the data after applying log 10 transformation, and the log-transformed price of a car and its age appear to follow a linear relationship. 
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\epsilon" title="log (Price) = \beta_0 + \beta_1 (Age) + \epsilon" /></a>
