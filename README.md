@@ -119,9 +119,17 @@ F-statistic:   470 on 97 and 11605 DF,  p-value: < 2.2e-16
 ```
 First, compare the residual standard error of 0.08996 when adding ID compared to 0.147 from the previous model that only used Age_year as the predictor. A reduction in error suggests that ID improves the model.
 
-The 'Estimate' column in the above table represents the depreciation rate (on Log 10 scale). Because certain  car makes such as incomplete data, they would have high 'Std. Error' which we will use in the graph below for visualisation. 
+The 'Estimate' column in the above table represents the depreciation rate (on Log 10 scale). Because certain  car makes such as Kia_Rondo have incomplete data, they would have high 'Std. Error'. In addition, we have a total of 97 IDs, which will look data messy and hard to get a clear message. Here, I only select the IDs with  SEM <= median SEM (lowest 50% SEM) for clarity, but raw data of estimates and SEM can be found in [depreciation_rates.txt](/depreciation_rates.txt).
 
-![](/car_depr_rates.png)
+![Low_depriciating_cars.png](/Low_depriciating_cars.png)
+
+
+
+
+
+
+
+
 
 
 
