@@ -119,9 +119,16 @@ F-statistic:   470 on 97 and 11605 DF,  p-value: < 2.2e-16
 ```
 First, compare the residual standard error of 0.08996 when adding ID compared to 0.147 from the previous model that only used Age_year as the predictor. A reduction in error suggests that ID improves the model.
 
-The 'Estimate' column in the above table represents the depreciation rate (on Log 10 scale). Because certain  car makes such as Kia_Rondo have incomplete data, they would have high 'Std. Error'. In addition, we have a total of 97 IDs, which will look data messy and hard to get a clear message. Here, I only select the IDs with  SEM <= median SEM (lowest 50% SEM) for clarity, but raw data of estimates and SEM can be found in [depreciation_rates.txt](/depreciation_rates.txt).
+The 'Estimate' column in the above table represents the depreciation rate (on Log 10 scale) **in addition** to the effect of age of a car. Because certain  car makes such as Kia_Rondo have incomplete data, they would have high 'Std. Error'. In addition, we have a total of 97 IDs, which will look data messy and hard to get a clear message. Here, I only select the IDs with  SEM <= median SEM (lowest 50% SEM) and colour-code them for clarity, but raw data of estimates and SEM can be found in [depreciation_rates.txt](/depreciation_rates.txt).
+
 
 ![Low_depriciating_cars.png](/Low_depriciating_cars.png)
+
+In the graph above,  IDs with Depreciation rate >0 (or close to 0) filled with solid black bars would retain the value the most. Starting from the top, Toyota_Tacoma actually has a positive depreciation rate, suggesting that it could overcome the loss in value imposed by age of a car to a limit; however, as the age increase this advantage would be lost (age > 10 years or so). Subaru_Outback, Toyota_Rav_V, Honda_CR-V, Hyundai_Santa, Kia_Sorento and so on should be retain their values over time, according to the KBB data. Toyota_Camry and Honda_Civic also do well in the graph above (having low SEM), although they do present with a low, negative depreciation rate.
+
+It is important to acknowledge the limitation of the data. IDs with low SEM may still not fit the data well. 
+
+### Which car to buy in a given price range?
 
 
 
