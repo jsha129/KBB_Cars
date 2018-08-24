@@ -54,7 +54,36 @@ This relationship is mathematically represented as follow:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\fn_phv&space;\large&space;log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\fn_phv&space;\large&space;log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\epsilon" title="\large log (Price) = \beta_0 + \beta_1 (Age) + \epsilon" /></a>
 
-where log 10 (Price) is the response variable and age of a car is the predictor variable. B0 is a constant of the model, B1 is cofficient of Age (ie  depreciation rate) and e is error or unexplained variation of the model. 
+where log 10 (Price) is the response variable and age of a car is the predictor variable. B0 is a constant of the model, B1 is cofficient of Age (ie contribution of each year to a car's price) and e is error or unexplained variation of the model. 
+
+Linear Model:
+
+```r
+fit.yearly.dep <- lm(log10(Price) ~ as.numeric(Age_year), df)
+summary(fit.yearly.dep)
+
+## OUTPUT
+Call:
+lm(formula = log10(Price) ~ as.numeric(Age_year), data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.25547 -0.09630 -0.00827  0.08752  0.84864 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(>|t|)    
+(Intercept)           4.3600791  0.0024445 1783.62   <2e-16 ***
+as.numeric(Age_year) -0.0404717  0.0004103  -98.65   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.147 on 11701 degrees of freedom
+Multiple R-squared:  0.4541,	Adjusted R-squared:  0.454 
+F-statistic:  9732 on 1 and 11701 DF,  p-value: < 2.2e-16
+
+```
+
+
 
 We will be applying log-linear model for rest of the case study.
 
@@ -64,9 +93,30 @@ Currently, the data frame has separate columns for Make (ie Honda) and Models (A
 EDA of each car make and model can be found in [car_depr_by_year_simple.pdf](/car_depr_by_year_simple.pdf)
 
 Next, we add the 'ID' variable in the original linear model comprising of a car's age.
+
 <a href="https://www.codecogs.com/eqnedit.php?latex=\fn_phv&space;\large&space;log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\beta_2&space;(ID)&plus;\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\fn_phv&space;\large&space;log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\beta_2&space;(ID)&plus;\epsilon" title="\large log (Price) = \beta_0 + \beta_1 (Age) + \beta_2 (ID)+\epsilon" /></a>
 
-where B2 is coefficient for the ID variable, the specific car make and model.
+where B2 is coefficient for the ID variable, ie the depreciation rate for a specific car make and model.
+
+```r
+fit.yearly.dep <- lm(log10(Price) ~ ID + as.numeric(Age_year), df)
+coeff <- summary(fit.yearly.dep)$coefficients
+print(coeff[c(1:3, nrow(coeff)),])
+
+## OUTPUT
+                        Estimate   Std. Error     t value     Pr(>|t|)
+(Intercept)           4.40367762 0.0038581329 1141.401214 0.000000e+00
+IDHonda_Civic        -0.04989184 0.0050281548   -9.922496 4.107618e-23
+IDHonda_CR-V          0.07200138 0.0052078311   13.825599 3.922797e-43
+as.numeric(Age_year) -0.04896388 0.0002708975 -180.746897 0.000000e+00
+
+Residual standard error: 0.08996 on 11605 degrees of freedom
+Multiple R-squared:  0.7971,	Adjusted R-squared:  0.7954 
+F-statistic:   470 on 97 and 11605 DF,  p-value: < 2.2e-16
+```
+
+
+
 
 
 
