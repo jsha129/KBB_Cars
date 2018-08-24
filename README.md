@@ -82,8 +82,7 @@ Multiple R-squared:  0.4541,	Adjusted R-squared:  0.454
 F-statistic:  9732 on 1 and 11701 DF,  p-value: < 2.2e-16
 
 ```
-
-
+Note the intercept of 4.36. Since the data is Log10-transformed, we will need to reverse it by using 10^4.36 = 22908.68, which is initial price of cars when Age_year = 0. The coefficient for Age_year is -0.04; therefore, the model would estimate price of a 10 year old car to be 10^(4.4 - 10 x 0.04) = 10,000 USD. This analysis, of course, does not consider how a specific make and model of a car modify the estimate, which we will do next. 
 
 We will be applying log-linear model for rest of the case study.
 
@@ -97,6 +96,10 @@ Next, we add the 'ID' variable in the original linear model comprising of a car'
 <a href="https://www.codecogs.com/eqnedit.php?latex=\fn_phv&space;\large&space;log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\beta_2&space;(ID)&plus;\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\fn_phv&space;\large&space;log&space;(Price)&space;=&space;\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\beta_2&space;(ID)&plus;\epsilon" title="\large log (Price) = \beta_0 + \beta_1 (Age) + \beta_2 (ID)+\epsilon" /></a>
 
 where B2 is coefficient for the ID variable, ie the depreciation rate for a specific car make and model.
+
+Obviously, we will need to reverse the effect of Log 10 transformation when predicting the actual Price of a car on linear scale, which is given by following equation:
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\fn_phv&space;\large&space;Price&space;=&space;10^{\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\beta_2&space;(ID)&plus;\epsilon}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\fn_phv&space;\large&space;Price&space;=&space;10^{\beta_0&space;&plus;&space;\beta_1&space;(Age)&space;&plus;&space;\beta_2&space;(ID)&plus;\epsilon}" title="\large Price = 10^{\beta_0 + \beta_1 (Age) + \beta_2 (ID)+\epsilon}" /></a>
 
 ```r
 fit.yearly.dep <- lm(log10(Price) ~ ID + as.numeric(Age_year), df)
@@ -114,6 +117,9 @@ Residual standard error: 0.08996 on 11605 degrees of freedom
 Multiple R-squared:  0.7971,	Adjusted R-squared:  0.7954 
 F-statistic:   470 on 97 and 11605 DF,  p-value: < 2.2e-16
 ```
+First, compare the residual standard error of 0.08996 when adding ID compared to 0.147 from the previous model that only used Age_year as the predictor. A reduction in error suggests that ID improves the model.
+
+
 
 
 
