@@ -47,6 +47,7 @@ The final data looks as follow:
 ![](/DF_structure.png)
 
 ## 3. Statistical modelling to estimate depreciation rates
+See [analysis.R](/analysis.R) for  complete code. 
 ### Modelling price of a car based on its age - an overview
 I used exploratory data analysis (EDA) to visualise how age of a car affects its price for all makes and models. From the graph on left below, the price of a car, in general, seem to follow 'exponential decay model' in response to its age. I plotted the data after applying log 10 transformation, and the log-transformed price of a car and its age appear to follow a linear relationship. 
 
