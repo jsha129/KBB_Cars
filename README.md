@@ -42,6 +42,7 @@ years <- seq(lubridate::year(Sys.Date())-20,lubridate::year(Sys.Date()),1)
 Rest should work fine. See [KBB_cars.log](/KBB_cars.log) for the log when I ran the script.
 
 ## 2. Data wrangling 
+Functions for data wrangling can be found in [presets.R](/presets.R). Valuable information/fields were extracted using a combination of `rvest`, `purrr` packages, regular expression and converting string to JSON object. 
 
 The final data looks as follow:
 ![](/DF_structure.png)
