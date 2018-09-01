@@ -166,7 +166,7 @@ Let's say that someone wants to buy cars for $20,000. The graph above suggests t
 In the figure on left in above ($20,000), the blue line representing Toyota_Camry is above than 'red' and 'green', suggesting that Camry retains its value more and Hyundai_Sonata ('green' line) indeed depreciates more than other cars in the price range. 
 
 
-I repeat this analysis for budget of $25,000 and $40,000 (middle and right figure in above, respectively). In general, the prediction made from above holds true. 
+I repeat this analysis for budget of $25,000 (Nissan_Frontier versus Kia_Sorento) and $40,000 (Toyota_4Runner versus Honda_Pilot; middle and right figure in above, respectively). In general, the prediction made from above holds true. 
 
 
 
