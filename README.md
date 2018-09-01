@@ -132,7 +132,7 @@ It is important to acknowledge the limitation of the data. IDs with low SEM may 
 ### Which car to buy in a given price range?
 Question: Which car in a given price range is less depreciated in a range of similarly priced car?
 
-In the analysis using log-linear model above, the constant B0 is generic to ALL car makes and models ('ID' variable). To estimate the B0 for each ID, I build a linear model for each ID using the R function 'lapply()'.
+In the analysis using log-linear model above, the constant B0 is generic to ALL car makes and models ('ID' variable). To estimate the B0 for each ID, I build a linear model for each ID using the R function `lapply()`.
 
 
 
