@@ -130,10 +130,9 @@ In the graph above,  IDs with Depreciation rate >0 (or close to 0) filled with s
 
 It is important to acknowledge the limitation of the data. IDs with low SEM may still not fit the data well. 
 
-### Which car to buy in a given price range?
-Question: Which car in a given price range is less depreciated in a range of similarly priced car?
+###  Which car in a given price range is less depreciated in a range of similarly priced car?
 
-In the analysis using log-linear model above, the constant B0 is generic to ALL car makes and models ('ID' variable). To estimate the B0 for each ID, I build a linear model for each ID using the R function `lapply()` and plot estimated cost of a new car on x axes versus depreciation rate on high confidence records.
+In the analysis using log-linear model above, the constant B0 is common to ALL car makes and models ('ID' variable). To estimate the B0 for each ID, I build a linear model for each ID using the R function `lapply()` and plot estimated cost of a new car on x axes versus depreciation rate on high confidence records.
 
 ```r
 model.fit <- lapply(unique(df$ID), function(i){
