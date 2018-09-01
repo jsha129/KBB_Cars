@@ -161,7 +161,7 @@ yearly.dep <- subset(yearly.dep, R.squared >= 0.5 &
 
 Let's say that someone wants to buy cars for $20,000. The graph above suggests that Hyndai_Sonata depreciates more than Toyota_Camry. To test whether above prediction is correct, I plot median price of each car over time to visually compared different cars and how they depreciate. 
 
-~[](/best_cars_3_price.png)
+![](/best_cars_3_price.png)
 
 In the figure on left in above ($20,000), the blue line representing Toyota_Camry is above than 'red' and 'green', suggesting that Camry retains its value more and Hyundai_Sonata ('green' line) indeed depreciates more than other cars in the price range. 
 
