@@ -132,7 +132,43 @@ It is important to acknowledge the limitation of the data. IDs with low SEM may 
 ### Which car to buy in a given price range?
 Question: Which car in a given price range is less depreciated in a range of similarly priced car?
 
-In the analysis using log-linear model above, the constant B0 is generic to ALL car makes and models ('ID' variable). To estimate the B0 for each ID, I build a linear model for each ID using the R function `lapply()`.
+In the analysis using log-linear model above, the constant B0 is generic to ALL car makes and models ('ID' variable). To estimate the B0 for each ID, I build a linear model for each ID using the R function `lapply()` and plot estimated cost of a new car on x axes versus depreciation rate on high confidence records.
+
+```r
+model.fit <- lapply(unique(df$ID), function(i){
+  j <- subset(df, ID == i)
+  j$Age_year <- as.numeric.factor(j$Age_year)
+  fit <- lm (log10(Price) ~ Age_year, j) # one factor
+  return(data.frame(ID=  i,
+                    Gradient = fit$coefficients["Age_year"], 
+                    R.squared = summary(fit)$r.squared,
+                    Residual_Std_Error = summary(fit)$sigma,
+                    Initial.Price = 10^fit$coefficients[1],
+                    Year.history = length(unique(as.factor(j$Age_year)))))
+})
+
+yearly.dep <- Reduce(rbind,model.fit)
+yearly.dep <- na.omit(yearly.dep)
+
+# -- selecting only high confidence records below
+yearly.dep <- subset(yearly.dep, R.squared >= 0.5 &
+                       Initial.Price < 1E5 & Initial.Price >2E3 &
+                       Year.history >= 10)
+```
+![](/yearly_dep_rate.png)
+
+
+
+Let's say that someone wants to buy cars for $20,000. The graph above suggests that Hyndai_Sonata depreciates more than Toyota_Camry. To test whether above prediction is correct, I plot median price of each car over time to visually compared different cars and how they depreciate. 
+
+~[](/best_cars_3_price.png)
+
+In the figure on left in above ($20,000), the blue line representing Toyota_Camry is above than 'red' and 'green', suggesting that Camry retains its value more and Hyundai_Sonata ('green' line) indeed depreciates more than other cars in the price range. 
+
+
+I repeat this analysis for budget of $25,000 and $40,000 (middle and right figure in above, respectively). In general, the prediction made from above holds true. 
+
+
 
 
 
