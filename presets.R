@@ -1,6 +1,6 @@
 ### Required packages
 list.of.packages <- c("rvest", "rjson", "purrr", "lubridate", 
-                      "dplyr", "reshape2", "ggplot2", "ggrepel")
+                      "dplyr", "reshape2", "ggplot2", "ggrepel", "ggpubr")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) {install.packages(new.packages)}
 
@@ -147,3 +147,18 @@ scarpe.kbb2 <- function(car.make,
   write.table(final.df, file = paste0(outputFile,".txt"), row.names = F, sep ="\t")
   
 }
+plotMedianCost <- function(cars, plottitle=""){
+  select_df <- subset(df, ID %in% cars)
+  # print(str(select_df))
+  select_df_agg <- aggregate(select_df$Price, by = list(select_df$ID, select_df$Age_year), median)
+  colnames(select_df_agg) <- c("ID", "Age_year", "Median_price")
+  
+  p <- ggplot(select_df_agg, aes(x = Age_year, y = Median_price, colour = ID, group = ID)) +
+    geom_line() +
+    geom_point(size = 2) + 
+    labs(title = plottitle, x = "Age in years", y = "Median Price, USD") +
+    guides(colour=guide_legend(ncol=1, title = NULL)) +
+    theme(legend.position = "bottom")
+  return(p)
+}
+
