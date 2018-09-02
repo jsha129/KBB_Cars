@@ -63,7 +63,7 @@ Although the details of unstructured text is not printed, the raw text for each 
 
 -----
 
-Valuable information/fields were extracted using a combination of `rvest`, `purrr` packages, regular expression and converting string to JSON object. Notice hidden JSON object in the text above, which was extracted using `gregexpr("\\{.*\\}*", text)` and converted to `list` using the R package `rjson`. 
+Valuable information/fields were extracted using a combination of `rvest`, `purrr` packages, regular expression and converting string to JSON object. Notice hidden JSON object highlighted in bold face in the text above, which was extracted using `gregexpr("\\{.*\\}*", text)` and converted to `list` using the R package `rjson`. 
 
 ```r
 get.veh.details <- function(webpage){
