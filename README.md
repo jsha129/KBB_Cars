@@ -6,11 +6,21 @@ Several factors influence a decision of buying a used car. While conventional wi
 
 Here, I web scrape Kelley Blue Book (KBB), a reputable website for searching for used cars in the US, to investigate how car values depreciate in general and identify which car make and model depreciates the least. Furthermore, I also test which car would provide best value for money in a given price range. 
 # Approach
-1. Write an R script that mines KBB for major makes of cars from several locations for last 20 years.
-2. Data wrangling to assemble a structured data frame from unstructured text record for each car identified in Step 1.
-3. Apply linear regression to model value of a car over years, predict depreciation rate for all makes. 
 
 All scripts are functional as of August 13, 2018.
+## 1. Write an R script that mines KBB for major makes of cars from several locations for last 20 years.
+This project uses web scraping in R using the `rvest` package. A user defines parameters such as makes of the cars of interest, zip codes of the cities of the sales and distance from the zip code. By default, the scripts looks for data over last 20 years, but this can be changed too. 
+
+All parameters are defined in [KBB_cars.R](/KBB_cars.R). 
+
+## 2. Data wrangling to assemble a structured data frame from unstructured text record for each car identified in Step 1.
+First, CSS tags for each field were identified from the webpage and parsed to the `rvest::html_text()` and `rvest::html_node()` for extracting values. Most CSS tags returned unstructured text, and meaningful information was extracted using regular expression or converting the text to JSON object. 
+
+Main function: `scarpe.kbb2()` and `get.veh.details()` - both defined in [presets.R](/presets.R).
+
+## 3. Apply linear regression to model value of a car over years, predict depreciation rate for all makes. 
+This is performed by [analysis.R](/analysis.R). The log-linear model was applied to estimate initial cost of a make and its depreciation rate. Summaries for each make  are plotted as boxplots in [car_depr_by_year_simple.pdf](/car_depr_by_year_simple.pdf). Estimated depreciation rates are exported in [depreciation_rates.csv](/depreciation_rates.csv). 
+
 
 # Disclaimer
 [Kelley Blue Book](www.kbb.com) reserves the rights to the data. Only summary of the data has been shown here. 
@@ -44,7 +54,7 @@ Rest should work fine. See [KBB_cars.log](/KBB_cars.log) for the log when I ran 
 ## 2. Data wrangling 
 Functions for data wrangling can be found in [presets.R](/presets.R). 
 
-Unstructured text for each car upon scraping is as follow:
+Although the details of unstructured text is not printed, the raw text for each car upon scraping is as follow:
 ```r
 "\n\t\n\t\t\n\t\t\tUsed 2015 Subaru Forester 2.5i Limited\n\t\t\n\t\n\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\n\t\t\t\t\t\n\t\t\t\n\t\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t$17,999\n\t\t\t\t\n\n\t\t\t\n\n\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\tMileage: 108,208\n\t\t\t\t\t\t\t\t\t\t\t\t\tExterior: Blue\n\t\t\t\t\t\t\t\t\t\t\t\t\tInterior: Gray\n\n\t\t\t\t\t\tVictory Motors of Colorado\n\n\t\t\t\t\t\t\t\t\n\t\t\t14 miles away\n\t\t\n\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t\n\t\t\n\n\t\t\n\t\t\n\t\t\t\tVictory Motors of Colorado\n\n\t\t\t\t\t\n\t\t\t14 miles away\n\t\t\n\n\n\n\t\t\n\t\n\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t44\n\t\t\t\t\n\n\t\t\n\t\tSponsored\n\t\n\n\n\t{\n\t\t\"@context\": \"http://schema.org/\",\n\t\t\"@type\": \"Car\",\n\t\t\"name\": \"Used 2015 Subaru Forester 2.5i Limited\",\n\t\t\"image\": \"//atcimages.kbb.com/scaler/152/114/hn/c/4e5c1f4a4c8842bdb094595cfc400521.jpg\",\n\t\t\"offers\": {\n\t\t\t\"@type\": \"Offer\",\n\t\t\t\"priceCurrency\": \"USD\",\n\t\t\t\"price\": \"17999\",\n\t\t\t\"itemCondition\": \"http://schema.org/UsedCondition\",\n\t\t\t\"availability\": \"http://schema.org/InStock\"\n\t\t},\n\t\t\"description\": \"Clean Car Fax w/ zero accidents and only 1 local owner. Features a reliable 2.5L 4CYL with seamless CVT automatic transmission and AWD. The exterior is Quartz Blue with fog lights, fresh tires, premium wheels, over sized moon roof, tinted windows and fog lights. The interior includes Gray leather, all season floor mats, cargo tray, Harmon Kardon Premium Sound, LCD display, backup camera, steering wheel mounted controls, heated seats, power windows/locks and much more!\",\n\t\t\"vehicleIdentificationNumber\": \"JF2SJARC0FH542624\",\n\t\t\"brand\": \"Subaru\",\n\t\t\"mileageFromOdometer\": {\n\t\t\t\"@type\": \"QuantitativeValue\",\n\t\t\t\"value\": \"108208\"\n\t\t},\n\t\t\"color\": \"Blue\",\n\t\t\"vehicleInteriorColor\": \"Gray\",\n\t\t\"vehicleTransmission\": \"Continuously Variable Automatic\",\n\t\t\"vehicleEngine\": \"4-Cylinder\",\n\t\t\"bodyType\": \"Sport Utility\"\n\t}\n"     
 ```
