@@ -51,6 +51,46 @@ Unstructured text for each car upon scraping is as follow:
 
 Valuable information/fields were extracted using a combination of `rvest`, `purrr` packages, regular expression and converting string to JSON object. 
 
+```r
+get.veh.details <- function(webpage){
+  # Main function, returns a data frame of results.
+  require(rvest)
+  require(purrr)
+  
+  # CSS Element names
+  css.veh.name <- ".js-vehicle-name"# ".title-three.vehicle-name"
+  css.veh.details <- ".js-used-listing" # unstructured text
+  css.veh.price <- ".highlight"
+  
+  # webpage <- read_html(url)
+  veh.full.name <- html_text(html_nodes(webpage, css.veh.name)) 
+  veh.full.name <- cleanStr(veh.full.name) # Extracted text: Used 2002 Honda Accord SE Sedan
+  split.veh.name <- strsplit(veh.full.name," ")
+  veh.submodel <- sapply(split.veh.name, function(i){ 
+    if(length(i) > 4){ # Submodel is not always reported, using 'length' of the outcome of strsplit as condition
+      return(paste0(i[5])) 
+    }
+    else{
+      return(c(""))
+    }
+  })
+  veh.price <- html_text(html_nodes(webpage, css.veh.price))
+  veh.price <- as.numeric(gsub("$", "", cleanStr(veh.price), fixed = T))
+  
+  veh.details <- html_text(html_nodes(webpage,css.veh.details))
+  # print(veh.details) # THIS IS THE TEXT SHOWN ABOVE.
+  strTojson <- invisible(lapply(veh.details, function(i){ 
+  # there was a hidden JSON object in the raw text. using 'rjson' package to convert it to list
+    start_curly <- map_int(gregexpr("\\{.*\\}*", i),1)
+    # print(start_curly)
+    temp <- substr(i, start = start_curly, nchar(i))
+    return(temp)
+  }))
+  
+  ### REST OF THE FUNCTION IS NOT SHOWN
+}
+```
+
 The final data looks as follow:
 ![](/DF_structure.png)
 
