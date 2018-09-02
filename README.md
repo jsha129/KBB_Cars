@@ -7,7 +7,7 @@ Several factors influence a decision of buying a used car. While conventional wi
 Here, I web scrape Kelley Blue Book (KBB), a reputable website for searching for used cars in the US, to investigate how car values depreciate in general and identify which car make and model depreciates the least. Furthermore, I also test which car would provide best value for money in a given price range. 
 # Approach
 1. Write an R script that mines KBB for major makes of cars from several locations for last 20 years.
-2. Assemble a **clean** data frame (data wrangling) with all information.
+2. Data wrangling to assemble a structured data frame from unstructured text record for each car identified in Step 1.
 3. Apply linear regression to model value of a car over years, predict depreciation rate for all makes. 
 
 All scripts are functional as of August 13, 2018.
