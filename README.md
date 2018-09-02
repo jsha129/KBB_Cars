@@ -42,7 +42,14 @@ years <- seq(lubridate::year(Sys.Date())-20,lubridate::year(Sys.Date()),1)
 Rest should work fine. See [KBB_cars.log](/KBB_cars.log) for the log when I ran the script.
 
 ## 2. Data wrangling 
-Functions for data wrangling can be found in [presets.R](/presets.R). Valuable information/fields were extracted using a combination of `rvest`, `purrr` packages, regular expression and converting string to JSON object. 
+Functions for data wrangling can be found in [presets.R](/presets.R). 
+
+Unstructured text for each car upon scraping is as follow:
+```r
+"\n\t\n\t\t\n\t\t\tUsed 2015 Subaru Forester 2.5i Limited\n\t\t\n\t\n\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\n\t\t\t\t\t\n\t\t\t\n\t\t\n\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t$17,999\n\t\t\t\t\n\n\t\t\t\n\n\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\tMileage: 108,208\n\t\t\t\t\t\t\t\t\t\t\t\t\tExterior: Blue\n\t\t\t\t\t\t\t\t\t\t\t\t\tInterior: Gray\n\n\t\t\t\t\t\tVictory Motors of Colorado\n\n\t\t\t\t\t\t\t\t\n\t\t\t14 miles away\n\t\t\n\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t\n\t\t\n\n\t\t\n\t\t\n\t\t\t\tVictory Motors of Colorado\n\n\t\t\t\t\t\n\t\t\t14 miles away\n\t\t\n\n\n\n\t\t\n\t\n\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t44\n\t\t\t\t\n\n\t\t\n\t\tSponsored\n\t\n\n\n\t{\n\t\t\"@context\": \"http://schema.org/\",\n\t\t\"@type\": \"Car\",\n\t\t\"name\": \"Used 2015 Subaru Forester 2.5i Limited\",\n\t\t\"image\": \"//atcimages.kbb.com/scaler/152/114/hn/c/4e5c1f4a4c8842bdb094595cfc400521.jpg\",\n\t\t\"offers\": {\n\t\t\t\"@type\": \"Offer\",\n\t\t\t\"priceCurrency\": \"USD\",\n\t\t\t\"price\": \"17999\",\n\t\t\t\"itemCondition\": \"http://schema.org/UsedCondition\",\n\t\t\t\"availability\": \"http://schema.org/InStock\"\n\t\t},\n\t\t\"description\": \"Clean Car Fax w/ zero accidents and only 1 local owner. Features a reliable 2.5L 4CYL with seamless CVT automatic transmission and AWD. The exterior is Quartz Blue with fog lights, fresh tires, premium wheels, over sized moon roof, tinted windows and fog lights. The interior includes Gray leather, all season floor mats, cargo tray, Harmon Kardon Premium Sound, LCD display, backup camera, steering wheel mounted controls, heated seats, power windows/locks and much more!\",\n\t\t\"vehicleIdentificationNumber\": \"JF2SJARC0FH542624\",\n\t\t\"brand\": \"Subaru\",\n\t\t\"mileageFromOdometer\": {\n\t\t\t\"@type\": \"QuantitativeValue\",\n\t\t\t\"value\": \"108208\"\n\t\t},\n\t\t\"color\": \"Blue\",\n\t\t\"vehicleInteriorColor\": \"Gray\",\n\t\t\"vehicleTransmission\": \"Continuously Variable Automatic\",\n\t\t\"vehicleEngine\": \"4-Cylinder\",\n\t\t\"bodyType\": \"Sport Utility\"\n\t}\n"     
+```
+
+Valuable information/fields were extracted using a combination of `rvest`, `purrr` packages, regular expression and converting string to JSON object. 
 
 The final data looks as follow:
 ![](/DF_structure.png)
@@ -168,20 +175,3 @@ In the figure on left in above ($20,000), the blue line representing Toyota_Camr
 
 
 I repeat this analysis for budget of $25,000 (Nissan_Frontier versus Kia_Sorento) and $40,000 (Toyota_4Runner versus Honda_Pilot; middle and right figure in above, respectively). In general, the prediction made from above holds true. Furthermore, it is consistent with the linear model (black and white bar graph above).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
