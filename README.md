@@ -64,7 +64,7 @@ get.veh.details <- function(webpage){
   
   # webpage <- read_html(url)
   veh.full.name <- html_text(html_nodes(webpage, css.veh.name)) 
-  veh.full.name <- cleanStr(veh.full.name) # Extracted text: Used 2002 Honda Accord SE Sedan
+  veh.full.name <- cleanStr(veh.full.name) # Extracted text: Used 2015 Subaru Forester 2.5i Limited
   split.veh.name <- strsplit(veh.full.name," ")
   veh.submodel <- sapply(split.veh.name, function(i){ 
     if(length(i) > 4){ # Submodel is not always reported, using 'length' of the outcome of strsplit as condition
